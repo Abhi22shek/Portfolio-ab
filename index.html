@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.jpg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Abhishek Borana | MERN & Next.js Full-Stack Developer</title>
+    <meta name="description" content="Full-stack web developer specializing in MERN Stack and Next.js. Building responsive, high-performance web applications with React, Node.js, Express, and MongoDB." />
+    <meta name="keywords" content="Full Stack Developer, MERN Stack, React Developer, Node.js, MongoDB, Next.js, Web Development" />
+    <meta name="author" content="Abhishek Borana" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://yourwebsite.com/" />
+    <meta property="og:title" content="Abhishek Borana | MERN & Next.js Full-Stack Developer" />
+    <meta property="og:description" content="Full-stack web developer specializing in MERN Stack and Next.js. Building responsive, high-performance web applications." />
+    <meta property="og:image" content="/avatar.jpg" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://yourwebsite.com/" />
+    <meta property="twitter:title" content="Abhishek Borana | MERN & Next.js Full-Stack Developer" />
+    <meta property="twitter:description" content="Full-stack web developer specializing in MERN Stack and Next.js. Building responsive, high-performance web applications." />
+    <meta property="twitter:image" content="/avatar.jpg" />
+  </head>
+
+    <!-- google font-link -->
+     <link rel="preconnect" href="https://fonts.googleapis.com">
+      <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+      <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Syne:wght@400..800&display=swap" rel="stylesheet"> 
+
+  <body>
+    <script>
+      // Initialize theme before React loads to prevent flash
+      (function() {
+        const savedTheme = localStorage.getItem('theme');
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = savedTheme || (prefersDark ? 'dark' : 'light');
+        document.documentElement.classList.add(theme);
+        document.body.classList.add(theme);
+      })();
+    </script>
+    <div id="root"></div>
+    <script type="module" src="/src/main.tsx"></script>
+  </body>
+</html>
