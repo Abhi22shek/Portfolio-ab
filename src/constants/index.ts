@@ -70,36 +70,36 @@ const socialLinks: LinksType[] = [
 
 const projectsData: ProjectType[] = [
   {
-    imgSrc: '/images/project-ph-1.jpeg',
-    hoverImgSrc: '/images/project-1-real.jpg',
-    title: 'Full Stack Music App',
-    tags: ['MERN', 'Real-time'],
-    projectLink: 'https://musify-5al0.onrender.com/',
-    githubLink: ''
+    imgSrc: '/images/project1.png',
+    title: 'Github Analyzer',
+    tags: ['React','github API' ,'Chart.js','tailwindcss'],
+    projectLink: 'https://github-analytic-dashboard.vercel.app/',
+    githubLink: 'https://github.com/Abhi22shek/github_analytic_dashboard',
+    description: 'A web application that analyzes Github user data and visulalizes it using charts and compares with other users.'
   },
   {
-    imgSrc: '/images/project-ph-2.jpeg',
-    hoverImgSrc: '/images/project-2-real.jpg',
-    title: 'E-Commerce Platform',
-    tags: ['React', 'Node.js'],
-    projectLink: '#',
-    githubLink: ''
+    imgSrc: '/images/poject3.png',
+    title: 'VibeTalk real-time chat app',
+    tags: ['MERN', 'Socket.io','DaisyUI'],
+    projectLink: 'https://fullstack-chat-app-ayqr.onrender.com/login',
+    githubLink: 'https://github.com/Abhi22shek/fullStack_Chat-App',
+    description: 'A full-stack real-time chat application built with the MERN stack and Socket.io, featuring user authentication, private messaging,  with 30+ themes using DaisyUI.'
   },
   {
-    imgSrc: '/images/project-ph-3.jpeg',
-    hoverImgSrc: '/images/project-3-real.jpg',
-    title: 'Task Management App',
-    tags: ['Next.js', 'MongoDB'],
-    projectLink: '#',
-    githubLink: ''
+    imgSrc: '/images/project2.png',
+    title: 'Employee Management App',
+    tags: ['MERN', 'TailwindCSS'],
+    projectLink: 'https://employee-data-management-assesement.vercel.app/',
+    githubLink: 'https://github.com/Abhi22shek/Employee-data-management-assesement-',
+    description: 'An employee management application built with the MERN stack, allowing CRUD operations on employee records with a responsive UI using TailwindCSS.'
   },
   {
-    imgSrc: '/images/project-ph-4.jpeg',
-    hoverImgSrc: '/images/project-4-real.jpg',
-    title: 'Social Media Dashboard',
-    tags: ['React', 'Express'],
-    projectLink: '#',
-    githubLink: ''
+    imgSrc: '/images/project4.png',
+    title: 'React Planner App',
+    tags: ['React', 'TailwindCSS'],
+    projectLink: 'https://react-planner-delta.vercel.app/',
+    githubLink: 'https://github.com/Abhi22shek/React-planner',
+    description: 'A React-based planner application that helps users organize tasks and events with a clean UI built using TailwindCSS.'
   },
   // Additional projects (hidden initially)
   {
@@ -108,7 +108,8 @@ const projectsData: ProjectType[] = [
     title: 'Weather Forecast App',
     tags: ['React', 'API'],
     projectLink: '#',
-    githubLink: ''
+    githubLink: '',
+    description: 'A full-stack music application built with the MERN stack, featuring real-time music streaming, user authentication, and personalized playlists.'
   },
   {
     imgSrc: '/images/project-ph-2.jpeg',
@@ -116,45 +117,41 @@ const projectsData: ProjectType[] = [
     title: 'Portfolio Website',
     tags: ['Next.js', 'Tailwind'],
     projectLink: '#',
-    githubLink: ''
+    githubLink: '',
+    description: 'A comprehensive e-commerce platform developed using React for the frontend and Node.js for the backend, offering seamless shopping experiences with secure payment integration.'
 
   },
 ];
 
 const education: ExperienceType[] = [
   {
-    year: '2018 – 2020',
-    title: 'Bachelor of Computer Science',
-    institute: 'National University of Technology',
-    desc: 'Focused on front-end development, UI design, and web application architecture.',
+    year: '2021 – 2025',
+    title: 'Bachelor of Technology in Computer Science',
+    institute: 'RGPV University, India',
+    desc: 'Focused on software development, data structures, algorithms, and web technologies. Graduated with honors.',
   },
   {
-    year: '2021 – 2022',
+    year: '2023 – 2024',
     title: 'Frontend Development Bootcamp',
-    institute: 'Udemy / Online Course',
+    institute: 'Coursera / Online Course',
     desc: 'Learned modern JavaScript, React, and responsive UI patterns through real-world projects.',
   },
   {
-    year: '2023',
-    title: 'Advanced UI/UX Design Course',
-    institute: 'Design+Code',
-    desc: 'Explored advanced design systems, motion design, and accessibility best practices.',
+    year: '2024 – 2025',
+    title: 'MERN Stack Development',
+    institute: '100xdevs / Online Course',
+    desc: 'Comprehensive MERN stack course covering MongoDB, Express, React, and Node.js with hands-on projects.',
   },
 ];
 
 const experience: ExperienceType[] = [
   {
-    year: '2021 – 2022',
+    year: '2024 – 2025',
     title: 'Frontend Developer Intern',
-    institute: 'PixelForge Studio',
-    desc: 'Built and optimized responsive websites, collaborating closely with designers and backend teams.',
+    institute: 'Safe your web',
+    desc: 'In 3-months of internship i Developed responsive web pages and components using React and Tailwind CSS, collaborating with the design team to enhance user experience.',
   },
-  {
-    year: '2022 – Present',
-    title: 'UI Engineer',
-    institute: 'Freelance / Remote Work',
-    desc: 'Designed and developed web interfaces for SaaS startups using React, Tailwind, and Figma.',
-  },
+  
 ];
 
 const tools: ToolsType[] = [
@@ -236,7 +233,7 @@ const statsData: StatsType[] = [
     label: 'Projects Completed',
   },
   {
-    number: '02+',
+    number: '01+',
     label: 'Years Learning',
   },
   {

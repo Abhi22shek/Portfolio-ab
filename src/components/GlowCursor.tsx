@@ -79,7 +79,7 @@ const GlowCursor = () => {
         }}
       >
         <motion.div
-          className='w-10 h-10 rounded-full bg-primary/20 blur-xl -translate-x-1/2 -translate-y-1/2'
+          className='w-15 h-15 rounded-full bg-primary/20 blur-xl -translate-x-1/2 -translate-y-1/2'
           animate={{
             scale: isHovering ? 1.5 : 1,
           }}

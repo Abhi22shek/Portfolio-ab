@@ -1,54 +1,34 @@
 import { motion } from 'motion/react';
-import { useState } from 'react';
 import { fadeUp } from '@/lib/animation';
-import { ExternalLink, LucideGithub } from 'lucide-react';
-import ProjectDetailModal from './ProjectDetailModal';
 
 import type { ProjectType } from '@/types';
+import { GithubIcon, Globe } from 'lucide-react';
 
 
 
-const ProjectCard = ({ imgSrc, projectLink, tags, title, githubLink, description, features, howItWorks, images }: ProjectType) => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-
-  const project: ProjectType = {
-    imgSrc,
-    projectLink,
-    tags,
-    title,
-    githubLink,
-    description,
-    features,
-    howItWorks,
-    images,
-  };
+const ProjectCard = ({ imgSrc, projectLink, tags, title, githubLink, description }: ProjectType) => {
 
   return (
     <>
       <div className='relative group block h-full'>
           <motion.div
-            onClick={() => setIsModalOpen(true)}
             variants={fadeUp}
             whileHover={{ y: -5 }}
-            className='block cursor-pointer'
-            aria-label={`View ${title} project details`}
+            className='block'
+            aria-label={`View ${title} project`}
           >
-            <figure className='overflow-hidden rounded-md relative shadow-lg group-hover:shadow-2xl group-hover:shadow-primary/20 transition-all duration-500'>
+            <figure className='overflow-hidden  rounded-md relative shadow-lg group-hover:shadow-2xl group-hover:shadow-primary/20 transition-all duration-500'>
               {/* Project Image */}
               <img
                 src={imgSrc}
                 alt={title}
                 loading='lazy'
-                className='rounded-md transition duration-700 group-hover:scale-110 w-full h-full object-cover aspect-video'
+                className='rounded-md object-cover transition duration-700 group-hover:scale-110 w-full h-full object-cover aspect-video'
               />
 
-              <div className='absolute inset-0 bg-linear-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center z-10'>
-                <motion.div
-                  initial={{ scale: 0 }}
-                  whileHover={{ scale: 1 }}
-                  transition={{ type: 'spring', stiffness: 300 }}
-                >
-                  <ExternalLink className='size-10 text-white' />
+              <div className='absolute  inset-0 bg-gradient-to-t from-black/85 via-black/60 to-transparent  opacity-0 group-hover:opacity-100 transition-opacity duration-300  flex justify-end items-end  p-4  z-10'>
+                <motion.div initial={{ scale: 0.95 }} animate={{ scale: 1 }} transition={{ duration: 0.25 }}>
+                  <p className='text-sm text-white   max-w-lg'>{description}</p>
                 </motion.div>
               </div>
             </figure>
@@ -78,18 +58,27 @@ const ProjectCard = ({ imgSrc, projectLink, tags, title, githubLink, description
                   className='bg-card border border-border text-foreground py-1 px-2 rounded-full text-xs hover:border-primary transition-colors duration-300'
                   onClick={(e) => e.stopPropagation()}
                 >
-                  <LucideGithub className='size-4' />
+                  <GithubIcon className='size-4' />
                 </motion.a>
               )}
+              
+              {projectLink && projectLink !== '' && (
+                <motion.a
+                  href={projectLink}
+                  target='_blank'
+                  rel='noopener noreferrer'
+                  whileHover={{ scale: 1.1 }}
+                  className='bg-card border border-border text-foreground py-1 px-2 rounded-full text-xs hover:border-primary transition-colors duration-300'
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <Globe className='size-4' />
+                </motion.a>
+              )}
+              
             </div>
           </div>
       </div>
 
-      <ProjectDetailModal
-        project={project}
-        isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
-      />
     </>
   );
 };

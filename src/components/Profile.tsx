@@ -96,7 +96,7 @@ const Profile = () => {
                   href='mailto:abhishek@example.com'
                   className='text-sm font-semibold hover:text-primary transition-colors truncate block'
                 >
-                  abhishek@example.com
+                  abhisheksen789bd@gmail.com
                 </a>
               </div>
             </motion.div>

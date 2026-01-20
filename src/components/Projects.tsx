@@ -40,6 +40,7 @@ const Projects = () => {
               tags={project.tags}
               title={project.title}
               githubLink={project.githubLink}
+              description={project.description}
             />
           ))}
         </AnimatePresence>
@@ -52,6 +53,7 @@ const Projects = () => {
           className='flex justify-center mt-10'
         >
           <Button
+            disabled={true}
             onClick={() => setShowAll(!showAll)}
             variant='outline'
             size='lg'

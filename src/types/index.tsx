@@ -8,6 +8,7 @@ export type ProjectType = {
   tags: string[];
   projectLink: string;
   githubLink: string;
+  description: string;
 };
 
 export type ExperienceType = {
