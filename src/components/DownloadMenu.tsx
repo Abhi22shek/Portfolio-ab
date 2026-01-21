@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { FileText, } from 'lucide-react';
 
 import { downloadResume,  trackDownload } from '@/lib/downloadUtils';

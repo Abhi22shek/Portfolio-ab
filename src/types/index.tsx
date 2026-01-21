@@ -1,5 +1,4 @@
 import type { LucideIcon } from 'lucide-react';
-import type { JSX } from 'react';
 
 export type ProjectType = {
   imgSrc: string;
@@ -34,15 +33,6 @@ export type StatsType = {
   number: string;
   label: string;
 };
-
-export type TestimonialsType = {
-  name: string;
-  role: string;
-  image: string;
-  text: string;
-  link: string;
-};
-
 export type LinksType = {
   label: string;
   link: string;
