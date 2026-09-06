@@ -106,7 +106,7 @@ export function getPortfolioUrl(): string {
     if (typeof window !== 'undefined') {
         return window.location.origin;
     }
-    return 'https://yourwebsite.com'; // Fallback
+    return 'https://portfolio-ab-lemon.vercel.app'; // Fallback
 }
 
 /**

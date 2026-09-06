@@ -10,6 +10,7 @@ import { MenuIcon } from 'lucide-react';
 
 import { navLinks, socialLinks } from '@/constants';
 import { cn } from '@/lib/utils';
+import ThemeToggle from './ThemeToggle';
 
 const Sidebar = () => {
   const [active, setActive] = useState<string>('');
@@ -48,8 +49,8 @@ const Sidebar = () => {
 
 
 
-            <div className='mt-30'>
-              <p className='pb-2 '>Socials</p>
+            <div className='mt-16'>
+              <p className='pb-2 text-sm font-medium'>Socials</p>
 
               <div className='flex gap-3 text-muted-foreground'>
                 {socialLinks.map((social,i) =>{
@@ -68,9 +69,12 @@ const Sidebar = () => {
                   );
                 })}
               </div>
-
             </div>
 
+            <div className='mt-8 pt-6 border-t border-border'>
+              <p className='pb-2 text-sm font-medium text-muted-foreground'>Theme</p>
+              <ThemeToggle />
+            </div>
         </SheetContent>
       </Sheet>
     </>

@@ -14,8 +14,13 @@ const ProjectCard = ({ imgSrc, projectLink, tags, title, githubLink, description
           <motion.div
             variants={fadeUp}
             whileHover={{ y: -5 }}
-            className='block'
+            className='block cursor-pointer'
             aria-label={`View ${title} project`}
+            onClick={() => {
+              if (projectLink && projectLink !== '#') {
+                window.open(projectLink, '_blank', 'noopener,noreferrer');
+              }
+            }}
           >
             <figure className='overflow-hidden  rounded-md relative shadow-lg group-hover:shadow-2xl group-hover:shadow-primary/20 transition-all duration-500'>
               {/* Project Image */}
@@ -23,7 +28,7 @@ const ProjectCard = ({ imgSrc, projectLink, tags, title, githubLink, description
                 src={imgSrc}
                 alt={title}
                 loading='lazy'
-                className='rounded-md object-cover transition duration-700 group-hover:scale-110 w-full h-full object-cover aspect-video'
+                className='rounded-md object-cover transition duration-700 group-hover:scale-110 w-full h-full aspect-video'
               />
 
               <div className='absolute  inset-0 bg-gradient-to-t from-black/85 via-black/60 to-transparent  opacity-0 group-hover:opacity-100 transition-opacity duration-300  flex justify-end items-end  p-4  z-10'>

@@ -6,7 +6,7 @@ import { motion } from 'motion/react';
 const ServiceCard = ({ service }: { service: ServiceType }) => {
   return (
     <motion.div
-      whileHover={{ scale: 1.02, y: -5 }}
+      whileHover={{ scale: 1, y: -5 }}
       className='flex items-start justify-between rounded-2xl border border-border bg-card p-8
      hover:bg-accent transition-all duration-300 hover:border-primary relative shadow-sm hover:shadow-xl hover:shadow-primary/10 overflow-hidden group'
     >

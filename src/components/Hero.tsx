@@ -5,6 +5,14 @@ import { SparkleIcon } from 'lucide-react';
 import DownloadMenu from './DownloadMenu';
 import ShareButton from './ShareButton';
 import { getPortfolioUrl } from '@/lib/shareUtils';
+import TypingText from './TypingText';
+import MagneticButton from './MagneticButton';
+
+const roles = [
+  'Software Engineer',
+  'MERN Stack Developer',
+  'Full-Stack Developer',
+];
 
 const Hero = () => {
   return (
@@ -26,15 +34,22 @@ const Hero = () => {
 
       <motion.h1
         variants={fadeUp}
-        className='text-4xl md:text-5xl lg:text-6xl font-semibold
-        mt-2 max-w-3xl md:leading-tight
-        '
+        className='text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-semibold mt-2 max-w-3xl md:leading-tight'
       >
-        I'm{' '}
-        <span className='bg-linear-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent'>
-          Abhishek Borana
+        <span className='block'>
+          I'm{' '}
+          <span className='bg-linear-to-r from-primary via-purple-500 to-pink-500 bg-clip-text text-transparent'>
+            Abhishek Borana
+          </span>
         </span>
-        , Full-Stack Developer
+        <span className='block text-primary mt-1.5 min-h-[1.25em]'>
+          <TypingText
+            words={roles}
+            typingSpeed={70}
+            deletingSpeed={40}
+            pauseDuration={2500}
+          />
+        </span>
       </motion.h1>
 
       <motion.p
@@ -51,24 +66,30 @@ const Hero = () => {
         variants={fadeUp}
         className='mt-8 flex gap-3 flex-wrap items-center'
       >
-        <Button
-          asChild
-          className='relative overflow-hidden group'
-        >
-          <a href='#projects'>
-            <span className='relative z-10'>My Projects</span>
-            <span className='absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
-          </a>
-        </Button>
+        <MagneticButton strength={0.25}>
+          <Button
+            asChild
+            className='relative overflow-hidden group'
+          >
+            <a href='#projects'>
+              <span className='relative z-10'>My Projects</span>
+              <span className='absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300' />
+            </a>
+          </Button>
+        </MagneticButton>
 
-        <DownloadMenu />
+        <MagneticButton strength={0.2}>
+          <DownloadMenu />
+        </MagneticButton>
 
-        <ShareButton
-          url={getPortfolioUrl()}
-          title='Abhishek Borana | MERN & Next.js Full-Stack Developer'
-          text='Check out my portfolio showcasing full-stack web development projects'
-          className='border-2 border-border hover:border-primary rounded-full'
-        />
+        <MagneticButton strength={0.2}>
+          <ShareButton
+            url={getPortfolioUrl()}
+            title='Abhishek Borana | MERN & Next.js Full-Stack Developer'
+            text='Check out my portfolio showcasing full-stack web development projects'
+            className='border-2 border-border hover:border-primary rounded-full'
+          />
+        </MagneticButton>
       </motion.div>
     </motion.section>
   );

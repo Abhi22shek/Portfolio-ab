@@ -7,7 +7,7 @@ function SectionHeader({title,subtitle}:{title:string,subtitle:string}) {
    <>
     <motion.p variants={fadeUp}
       className='flex items-center justify-center py-1 gap-2 border 
-      border-neutral-600 rounded-sm w-32 '
+      border-border rounded-sm w-32 '
     >
       <SparkleIcon size={15} />
       <span>{subtitle}</span>

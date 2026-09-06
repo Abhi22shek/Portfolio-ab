@@ -1,30 +1,17 @@
-import { useEffect, useState } from 'react';
-import { motion } from 'motion/react';
+import { motion, useScroll, useSpring } from 'motion/react';
 
 const ScrollProgress = () => {
-  const [scrollProgress, setScrollProgress] = useState(0);
-
-  useEffect(() => {
-    const updateScrollProgress = () => {
-      const scrollPx = document.documentElement.scrollTop;
-      const winHeightPx =
-        document.documentElement.scrollHeight -
-        document.documentElement.clientHeight;
-      const scrolled = (scrollPx / winHeightPx) * 100;
-
-      setScrollProgress(scrolled);
-    };
-
-    window.addEventListener('scroll', updateScrollProgress);
-
-    return () => window.removeEventListener('scroll', updateScrollProgress);
-  }, []);
+  const { scrollYProgress } = useScroll();
+  const scaleX = useSpring(scrollYProgress, {
+    stiffness: 100,
+    damping: 30,
+    restDelta: 0.001,
+  });
 
   return (
     <motion.div
       className='fixed top-0 left-0 right-0 h-1 bg-primary z-50 origin-left'
-      style={{ scaleX: scrollProgress / 100 }}
-      initial={{ scaleX: 0 }}
+      style={{ scaleX }}
     />
   );
 };

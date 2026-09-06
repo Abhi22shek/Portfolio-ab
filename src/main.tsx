@@ -6,9 +6,9 @@ import Sidebar from '@/components/Sidebar';
 import FloatingMenu from './components/FloatingMenu.tsx';
 import Profile from './components/Profile.tsx';
 import LoadingScreen from './components/LoadingScreen.tsx';
-import ThemeCustomizer from './components/ThemeCustomizer.tsx';
 import SkipToContent from './components/SkipToContent.tsx';
-import { ThemeProvider } from './lib/ThemeContext.tsx';
+import { ThemeProvider } from '@/lib/ThemeContext.tsx';
+import ThemeCustomizer from './components/ThemeCustomizer.tsx';
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

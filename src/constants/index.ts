@@ -58,7 +58,7 @@ const socialLinks: LinksType[] = [
   {
     icon: Linkedin,
     label: 'Linkedin',
-    link: 'www.linkedin.com/in/abhishekb2202',
+    link: 'https://www.linkedin.com/in/abhishekb2202',
 
   },
   {
@@ -72,7 +72,7 @@ const projectsData: ProjectType[] = [
   {
     imgSrc: '/images/project1.png',
     title: 'Github Analyzer',
-    tags: ['React','github API' ,'Chart.js','tailwindcss'],
+    tags: ['React', 'github API', 'Chart.js', 'tailwindcss'],
     projectLink: 'https://github-analytic-dashboard.vercel.app/',
     githubLink: 'https://github.com/Abhi22shek/github_analytic_dashboard',
     description: 'A web application that analyzes Github user data and visulalizes it using charts and compares with other users.'
@@ -80,7 +80,7 @@ const projectsData: ProjectType[] = [
   {
     imgSrc: '/images/poject3.png',
     title: 'VibeTalk real-time chat app',
-    tags: ['MERN', 'Socket.io','DaisyUI'],
+    tags: ['MERN', 'Socket.io', 'DaisyUI'],
     projectLink: 'https://fullstack-chat-app-ayqr.onrender.com/login',
     githubLink: 'https://github.com/Abhi22shek/fullStack_Chat-App',
     description: 'A full-stack real-time chat application built with the MERN stack and Socket.io, featuring user authentication, private messaging,  with 30+ themes using DaisyUI.'
@@ -151,7 +151,14 @@ const experience: ExperienceType[] = [
     institute: 'Safe your web',
     desc: 'In 3-months of internship i Developed responsive web pages and components using React and Tailwind CSS, collaborating with the design team to enhance user experience.',
   },
-  
+  {
+    year: '08/2026-present',
+    title: 'Software engineer',
+    institute: 'Accenture Solutions Pvt Ltd',
+    desc: 'Joined Accenture as a Software Engineer, currently developing technical expertise through training and hands-on learning in full-stack web development, including React,Angular, Node.js, JavaScript, and related technologies.'
+
+  }
+
 ];
 
 const tools: ToolsType[] = [

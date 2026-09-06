@@ -1,77 +1,41 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'motion/react';
 import { navLinks } from '@/constants';
 import { cn } from '@/lib/utils';
+import ThemeToggle from './ThemeToggle';
 
 const FloatingMenu = () => {
   const [active, setActive] = useState('#hero');
   const [hoveredLink, setHoveredLink] = useState<string | null>(null);
 
+  const activeRef = useRef('#hero');
+
   useEffect(() => {
-    const handleScroll = () => {
-      const sections = navLinks.map((link) => {
-        const element = document.querySelector(link.link);
-        if (element) {
-          const rect = element.getBoundingClientRect();
-          return {
-            id: link.link,
-            top: rect.top,
-            bottom: rect.bottom,
-            height: rect.height,
-          };
-        }
-        return null;
-      }).filter(Boolean);
+    const sectionIds = navLinks.map((l) => l.link.replace('#', ''));
+    const elements = sectionIds
+      .map((id) => document.getElementById(id))
+      .filter((el): el is HTMLElement => el !== null);
 
-      // Find the section that's most visible in the viewport
-      const viewportHeight = window.innerHeight;
-      const viewportCenter = viewportHeight / 2;
-
-      let maxVisibility = 0;
-      let mostVisibleSection = null;
-
-      sections.forEach((section) => {
-        if (section) {
-          // Calculate how much of the section is visible
-          const visibleTop = Math.max(0, Math.min(section.bottom, viewportHeight) - Math.max(0, section.top));
-          const visibilityRatio = visibleTop / viewportHeight;
-
-          // Check if section center is near viewport center
-          const sectionCenter = (section.top + section.bottom) / 2;
-          const distanceFromCenter = Math.abs(sectionCenter - viewportCenter);
-          const centerProximity = 1 - (distanceFromCenter / viewportHeight);
-
-          // Combined score: visibility + center proximity
-          const score = visibilityRatio * 0.6 + centerProximity * 0.4;
-
-          if (score > maxVisibility) {
-            maxVisibility = score;
-            mostVisibleSection = section.id;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        const visibleEntries = entries.filter((e) => e.isIntersecting);
+        if (visibleEntries.length > 0) {
+          visibleEntries.sort((a, b) => b.intersectionRatio - a.intersectionRatio);
+          const activeId = `#${visibleEntries[0].target.id}`;
+          if (activeId !== activeRef.current) {
+            activeRef.current = activeId;
+            setActive(activeId);
           }
         }
-      });
-
-      if (mostVisibleSection) {
-        setActive(mostVisibleSection);
+      },
+      {
+        rootMargin: '-15% 0px -35% 0px',
+        threshold: [0, 0.25, 0.5, 0.75, 1],
       }
-    };
+    );
 
-    // Throttle scroll events for better performance
-    let ticking = false;
-    const scrollListener = () => {
-      if (!ticking) {
-        window.requestAnimationFrame(() => {
-          handleScroll();
-          ticking = false;
-        });
-        ticking = true;
-      }
-    };
-
-    window.addEventListener('scroll', scrollListener);
-    handleScroll(); // Initial check
-
-    return () => window.removeEventListener('scroll', scrollListener);
+    elements.forEach((el) => observer.observe(el));
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -163,6 +127,11 @@ const FloatingMenu = () => {
           </motion.a>
         );
       })}
+
+      <div className='w-6 h-px bg-border mx-auto my-2' />
+      <div className='flex justify-center'>
+        <ThemeToggle compact className='border-0 bg-transparent shadow-none hover:bg-primary/10' />
+      </div>
     </div>
   );
 };

@@ -1,138 +1,101 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { motion, useMotionValue, useSpring } from 'motion/react';
 import { useTheme } from '@/lib/ThemeContext';
 
 const GlowCursor = () => {
-  const theme = useTheme();
+  const { preferences } = useTheme();
   const [isVisible, setIsVisible] = useState(false);
   const [isHovering, setIsHovering] = useState(false);
-
-  // Don't render if cursor glow is disabled
-  if (!theme.preferences.cursorGlowEnabled) {
-    return null;
-  }
+  const isHoveringRef = useRef(false);
 
   const cursorX = useMotionValue(-100);
   const cursorY = useMotionValue(-100);
 
-  // Smoother spring config
-  const springConfig = { damping: 30, stiffness: 400, mass: 0.3 };
+  // Ultra-responsive spring config: zero perceived latency, silky-smooth follow
+  const springConfig = { damping: 38, stiffness: 720, mass: 0.08 };
   const cursorXSpring = useSpring(cursorX, springConfig);
   const cursorYSpring = useSpring(cursorY, springConfig);
 
   useEffect(() => {
-    // Hide system cursor on desktop
-    const style = document.createElement('style');
-    style.innerHTML = `
-      @media (min-width: 500px) {
-        * {
-          cursor: none !important;
-        }
-      }
-    `;
-    document.head.appendChild(style);
+    // Only apply on fine pointer devices (desktops/laptops)
+    const isPointerFine = window.matchMedia('(pointer: fine)').matches;
+    if (!isPointerFine) return;
+
+    let rafId: number | null = null;
 
     const updateMousePosition = (e: MouseEvent) => {
       cursorX.set(e.clientX);
       cursorY.set(e.clientY);
-      setIsVisible(true);
 
-      // Check if hovering over interactive elements
-      const target = e.target as HTMLElement;
-      const isInteractive = 
-        target.tagName === 'A' ||
-        target.tagName === 'BUTTON' ||
-        target.tagName === 'INPUT' ||
-        target.tagName === 'TEXTAREA' ||
-        target.closest('a') !== null ||
-        target.closest('button') !== null ||
-        target.onclick !== null ||
-        window.getComputedStyle(target).cursor === 'pointer';
-      
-      setIsHovering(isInteractive);
+      if (!isVisible) {
+        setIsVisible(true);
+      }
+
+      // Throttle hover detection to animation frames and avoid getComputedStyle
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          rafId = null;
+          const target = e.target as HTMLElement | null;
+          if (target) {
+            const isInteractive = Boolean(
+              target.closest('a, button, input, textarea, select, [role="button"], .cursor-pointer')
+            );
+            if (isInteractive !== isHoveringRef.current) {
+              isHoveringRef.current = isInteractive;
+              setIsHovering(isInteractive);
+            }
+          }
+        });
+      }
     };
 
     const handleMouseLeave = () => {
       setIsVisible(false);
     };
 
-    window.addEventListener('mousemove', updateMousePosition);
+    window.addEventListener('mousemove', updateMousePosition, { passive: true });
     document.addEventListener('mouseleave', handleMouseLeave);
 
     return () => {
+      if (rafId) cancelAnimationFrame(rafId);
       window.removeEventListener('mousemove', updateMousePosition);
       document.removeEventListener('mouseleave', handleMouseLeave);
-      document.head.removeChild(style);
     };
-  }, [cursorX, cursorY]);
+  }, [cursorX, cursorY, isVisible]);
 
-  if (!isVisible) return null;
+  if (!preferences.cursorGlowEnabled || !isVisible) return null;
 
   return (
-    <>
-      {/* Main cursor glow */}
-      <motion.div
-        className='fixed top-0 left-0 pointer-events-none z-[9999] hidden  sm:block'
+    <motion.div
+      className='fixed top-0 left-0 pointer-events-none z-[9999] hidden sm:block will-change-transform'
+      style={{
+        x: cursorXSpring,
+        y: cursorYSpring,
+        translateX: '-50%',
+        translateY: '-50%',
+      }}
+    >
+      {/* Glow aura - GPU friendly */}
+      <div
+        className={`rounded-full transition-all duration-200 ${
+          isHovering
+            ? 'w-14 h-14 bg-primary/25 scale-125'
+            : 'w-10 h-10 bg-primary/15'
+        }`}
         style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
+          boxShadow: isHovering
+            ? '0 0 25px 8px rgba(184, 72, 24, 0.25)'
+            : '0 0 15px 4px rgba(184, 72, 24, 0.15)',
         }}
-      >
-        <motion.div
-          className='w-15 h-15 rounded-full bg-primary/20 blur-xl -translate-x-1/2 -translate-y-1/2'
-          animate={{
-            scale: isHovering ? 1.5 : 1,
-          }}
-          transition={{
-            type: 'spring',
-            damping: 20,
-            stiffness: 300,
-          }}
-        />
-      </motion.div>
+      />
 
-      {/* Outer ring */}
-      <motion.div
-        className='fixed top-0 left-0 pointer-events-none z-[9999] hidden sm:block'
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-        }}
-      >
-        <motion.div
-          className='w-8 h-8 rounded-full border-2 border-primary/30 -translate-x-1/2 -translate-y-1/2'
-          animate={{
-            scale: isHovering ? 1.5 : 1,
-          }}
-          transition={{
-            type: 'spring',
-            damping: 20,
-            stiffness: 300,
-          }}
-        />
-      </motion.div>
-
-      {/* Main cursor dot */}
-      <motion.div
-        className='fixed top-0 left-0 pointer-events-none z-[9999] hidden sm:block'
-        style={{
-          x: cursorXSpring,
-          y: cursorYSpring,
-        }}
-      >
-        <motion.div
-          className='w-2 h-2 rounded-full bg-primary -translate-x-1/2 -translate-y-1/2'
-          animate={{
-            scale: isHovering ? 1.5 : 1,
-          }}
-          transition={{
-            type: 'spring',
-            damping: 15,
-            stiffness: 400,
-          }}
-        />
-      </motion.div>
-    </>
+      {/* Center sharp dot */}
+      <div
+        className={`absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-full bg-primary transition-transform duration-150 ${
+          isHovering ? 'w-3 h-3 scale-110' : 'w-2 h-2'
+        }`}
+      />
+    </motion.div>
   );
 };
 

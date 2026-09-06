@@ -53,7 +53,7 @@ const Projects = () => {
           className='flex justify-center mt-10'
         >
           <Button
-            disabled={true}
+
             onClick={() => setShowAll(!showAll)}
             variant='outline'
             size='lg'

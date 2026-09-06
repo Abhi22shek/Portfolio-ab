@@ -16,12 +16,13 @@ const STORAGE_KEY = 'portfolio-theme-preferences';
 export function ThemeProvider({ children }: { children: ReactNode }) {
   const [preferences, setPreferences] = useState<ThemePreferences>(DEFAULT_THEME_PREFERENCES);
   const [mounted, setMounted] = useState(false);
+  const [isCustomizerOpen, setIsCustomizerOpen] = useState(false);
 
   // Load preferences from localStorage on mount
   useEffect(() => {
     setMounted(true);
     const stored = localStorage.getItem(STORAGE_KEY);
-    
+
     if (stored) {
       try {
         const parsed = JSON.parse(stored) as ThemePreferences;
@@ -34,19 +35,12 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     } else {
       // Check for legacy theme preference
       const legacyTheme = localStorage.getItem('theme') as ThemePreset | null;
-      if (legacyTheme === 'dark' || legacyTheme === 'light') {
+      if (legacyTheme && ['dark', 'light', 'ocean', 'cherry-blossom', 'royal', 'retro'].includes(legacyTheme)) {
         const migratedPrefs = { ...DEFAULT_THEME_PREFERENCES, preset: legacyTheme };
         setPreferences(migratedPrefs);
         applyTheme(migratedPrefs);
       } else {
-        // Use system preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const initialPrefs = {
-          ...DEFAULT_THEME_PREFERENCES,
-          preset: (prefersDark ? 'dark' : 'light') as ThemePreset,
-        };
-        setPreferences(initialPrefs);
-        applyTheme(initialPrefs);
+        applyTheme(DEFAULT_THEME_PREFERENCES);
       }
     }
   }, []);
@@ -82,6 +76,7 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     );
     root.classList.add(prefs.preset);
     body.classList.add(prefs.preset);
+    root.setAttribute('data-theme', prefs.preset);
 
     // Apply accent color
     if (prefs.accentColor) {
@@ -136,6 +131,10 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setPreferences(DEFAULT_THEME_PREFERENCES);
   };
 
+  const toggleCustomizer = () => {
+    setIsCustomizerOpen((prev) => !prev);
+  };
+
   const value: ThemeContextType = {
     preferences,
     setPreset,
@@ -144,6 +143,9 @@ export function ThemeProvider({ children }: { children: ReactNode }) {
     setAnimationSpeed,
     toggleCursorGlow,
     resetToDefaults,
+    isCustomizerOpen,
+    setIsCustomizerOpen,
+    toggleCustomizer,
   };
 
   return <ThemeContext.Provider value={value}>{children}</ThemeContext.Provider>;

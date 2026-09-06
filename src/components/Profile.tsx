@@ -2,6 +2,7 @@ import { motion } from 'motion/react';
 import { socialLinks } from '@/constants';
 import { Button } from './ui/button';
 import { MapPin, Briefcase, Mail, CheckCircle2 } from 'lucide-react';
+import ThemeToggle from './ThemeToggle';
 
 const Profile = () => {
   return (
@@ -9,18 +10,19 @@ const Profile = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.5 }}
-      className='max-w-3xl m-6 lg:sticky lg:left-0 lg:top-6 lg:w-96'
+      className='max-w-2xl m-6 lg:sticky lg:left-0 lg:top-6 lg:w-96'
     >
       {/* Main Profile Card */}
       <div className='bg-card border border-border rounded-2xl overflow-hidden shadow-xl'>
-        {/* Header with Pattern */}
-        <div className='relative h-24 bg-primary/5 border-b border-border'>
-          <div className='absolute inset-0 opacity-10'>
+        {/* Header with Pattern and Theme Toggle */}
+        <div className='relative h-24 bg-primary/5 border-b border-border flex items-start justify-end p-3'>
+          <div className='absolute inset-0 opacity-10 pointer-events-none'>
             <div className='absolute inset-0' style={{
               backgroundImage: 'radial-gradient(circle, currentColor 1px, transparent 1px)',
               backgroundSize: '20px 20px'
             }} />
           </div>
+          <ThemeToggle className='relative z-10' />
         </div>
 
         {/* Profile Content */}
@@ -93,7 +95,7 @@ const Profile = () => {
               <div className='min-w-0 flex-1'>
                 <p className='text-xs text-muted-foreground font-medium'>Email</p>
                 <a
-                  href='mailto:abhishek@example.com'
+                  href='mailto:abhisheksen789bd@gmail.com'
                   className='text-sm font-semibold hover:text-primary transition-colors truncate block'
                 >
                   abhisheksen789bd@gmail.com

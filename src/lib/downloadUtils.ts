@@ -17,9 +17,11 @@ export function downloadFile(url: string, filename: string): void {
 
 /**
  * Download resume PDF
+ * Uses Google Drive direct download link format
  */
 export function downloadResume(): void {
-    downloadFile('https://drive.google.com/file/d/1lW9I-95nHnYo4bmBuyPjYv55d6g-P_6-/view?usp=sharing', 'Abhishek_Borana_Resume.pdf');
+    // Open in new tab since Google Drive handles the download
+    window.open('https://drive.google.com/uc?export=download&id=1lW9I-95nHnYo4bmBuyPjYv55d6g-P_6-', '_blank');
 }
 
 

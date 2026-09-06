@@ -92,7 +92,7 @@ export default function ShareButton({ url, title, text, className = '' }: ShareB
                 animate={{ opacity: 1, scale: 1, y: 0 }}
                 exit={{ opacity: 0, scale: 0.95, y: -10 }}
                 transition={{ duration: 0.15 }}
-                className="absolute right-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-xl z-50 overflow-hidden"
+                className="absolute right-0 mt-2 w-64 bg-card border border-border rounded-lg shadow-xl z-40 overflow-hidden"
               >
                 <div className="p-2 space-y-1">
                   {/* Web Share API (if available) */}

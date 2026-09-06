@@ -10,25 +10,41 @@ import Resume from './components/Resume';
 import Contact from './components/Contact';
 import BackToTop from './components/BackToTop';
 import ScrollProgress from './components/ScrollProgress';
+import ParallaxBackground from './components/ParallaxBackground';
+import MobileDock from './components/MobileDock';
 
 import GlowCursor from './components/GlowCursor';
 
-
 function App() {
   useEffect(() => {
-    const lenis = new Lenis();
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      orientation: 'vertical',
+      gestureOrientation: 'vertical',
+      smoothWheel: true,
+      wheelMultiplier: 0.95,
+      touchMultiplier: 1.8,
+    });
 
     function raf(time: number) {
       lenis.raf(time);
       requestAnimationFrame(raf);
     }
-    requestAnimationFrame(raf);
+    const frameId = requestAnimationFrame(raf);
+
+    return () => {
+      cancelAnimationFrame(frameId);
+      lenis.destroy();
+    };
   }, []);
 
   return (
-    <>
+    <div className='relative min-h-screen w-full overflow-x-clip'>
       <GlowCursor />
       <ScrollProgress />
+      <ParallaxBackground />
+      <MobileDock />
       <main id='main-content' className='flex flex-col container mx-auto p-10 max-w-4xl lg:pr-10 lg:pl-0 lg:max-w-6xl relative z-10'>
         <Hero />
         <Stats />
@@ -39,7 +55,7 @@ function App() {
         <Contact />
       </main>
       <BackToTop />
-    </>
+    </div>
   );
 }
 

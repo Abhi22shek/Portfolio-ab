@@ -13,7 +13,7 @@ const ExpCard = ({item}:{item:ExperienceType}) => {
         </span>
         <h3 className=" text-lg font-semibold mt-1">{item.title}</h3>
         <p className="text-sm text-muted-foreground mb-1">
-            Course by {' '} <span className='font-medium text-foreground'>{item.institute}</span>
+            At {' '} <span className='font-medium text-foreground'>{item.institute}</span>
         </p>
         <p className="text-sm text-muted-foreground">
             {item.desc}
